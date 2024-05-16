@@ -5,10 +5,11 @@ import { IoSendSharp } from "react-icons/io5";
 import { HiOutlineFaceSmile } from "react-icons/hi2";
 import { ChatContext } from '../../Context/ChatContext';
 import UserChat from '../Chat/UserChat';
-import {AuthContext} from "../../Context/AuthContext"
+import { AuthContext } from "../../Context/AuthContext"
+import PotentialChats from '../Chat/PotentialChats';
 
 const Menu = () => {
-const {user}=useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const { userChats, isUserChatsLoading, UserChatsError } = useContext(ChatContext)
     console.log("userChats : ", userChats);
     return (
@@ -16,14 +17,18 @@ const {user}=useContext(AuthContext)
             <div className="Menu">
                 <div className="left_menu">
                     <input type="text" name="" id="" className='search_input' placeholder='Search..' />
+                    <PotentialChats />
                     {userChats?.length < 1 ? null : (
-                        <div className='message-box'>
+                        <div className='message_box'>
                             {isUserChatsLoading && <p>Loading Chats...</p>}
                             {
-                                userChats?.map((chat,index)=>{
+                                userChats?.map((chat, index) => {
                                     return (
-                                        <div key={index}>
-                                        <UserChat chat={chat} user={user}/>
+                                        <div key={index} className='card'>
+                                            <UserChat chat={chat} user={user} />
+                                            <div className="hr">
+                                                <hr />
+                                            </div>
                                         </div>
                                     )
                                 })}
@@ -34,9 +39,6 @@ const {user}=useContext(AuthContext)
                         <img src={user} alt="" height={"50px"} width={"50px"} className='img' />
                         <h3>Vishala Gajera</h3>
                     </div> */}
-                    <div className="hr">
-                        <hr />
-                    </div>
                 </div>
                 <div className="right_chat">
                     <div className="main_content">

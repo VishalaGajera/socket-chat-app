@@ -9,13 +9,13 @@ exports.createChat = async (req, res) => {
             return res.status(200).json({ chat: chat, message: "Chat is Alerady Added...👍🏻" })
         }
         if (!firstId && !secondId) {
-            return res.status(400).json({ message: "" })
+            return res.status(400).json({ message: "FirstId and SecondId is required" })
         }
         if (!firstId) {
-            return res.status(400).json({ message: "" })
+            return res.status(400).json({ message: "FirstId is required" })
         }
         if (!secondId) {
-            return res.status(400).json({ message: "" })
+            return res.status(400).json({ message: "SecondId is required" })
         }
         chat = await chatService.addNewChat({ members: [firstId, secondId] })
         return res.status(200).json({ chat: chat, message: "New Chat Is Added Successfully...👍🏻" })

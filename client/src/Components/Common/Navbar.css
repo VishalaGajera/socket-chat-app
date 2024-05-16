@@ -1,0 +1,33 @@
+.navbar{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: #6c9afb;
+    color: white;
+}
+
+.navbar .heading{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 100px;
+}
+
+.navbar .links{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-right: 100px;
+    gap: 20px;
+}
+
+.links .links p{
+    font-weight: bold;
+    font-size:x-large;
+}
+
+.links .link{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+}

@@ -65,7 +65,7 @@ console.log(" -- body :-- " , req.body);
 
 exports.getUser = async (req, res) => {
     try {
-        let user = await userService.getUserById(req.body.userId);
+        let user = await userService.getUserById(req.params.userId);
         if (!user) {
             return res.status(404).json({ message: `User Not Found...Please Try Again` })
         }

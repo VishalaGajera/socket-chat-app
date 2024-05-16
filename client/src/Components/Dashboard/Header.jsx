@@ -18,10 +18,6 @@ const Header = () => {
                         <IoMdMenu />
                     </div>
                 </div>
-                <div className="right_header">
-                        <img src={user} alt="" height={"50px"} width={"50px"} className='img'/>
-                        <h3>Vishala Gajera</h3>
-                </div>
             </div>
         </>
     )

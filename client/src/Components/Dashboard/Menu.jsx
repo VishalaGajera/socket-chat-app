@@ -1,30 +1,27 @@
 import React, { useContext } from 'react'
-import user from "../../Images/user.png";
-import { PiMicrophoneFill } from "react-icons/pi";
-import { IoSendSharp } from "react-icons/io5";
-import { HiOutlineFaceSmile } from "react-icons/hi2";
 import { ChatContext } from '../../Context/ChatContext';
 import UserChat from '../Chat/UserChat';
 import { AuthContext } from "../../Context/AuthContext"
 import PotentialChats from '../Chat/PotentialChats';
+import ChatBox from '../Chat/ChatBox';
 
 const Menu = () => {
     const { user } = useContext(AuthContext)
-    const { userChats, isUserChatsLoading, UserChatsError } = useContext(ChatContext)
+    const { userChats, isUserChatsLoading, updateCurrentChat } = useContext(ChatContext)
     console.log("userChats : ", userChats);
     return (
         <>
-            <div className="Menu">
-                <div className="left_menu">
-                    <input type="text" name="" id="" className='search_input' placeholder='Search..' />
-                    <PotentialChats />
-                    {userChats?.length < 1 ? null : (
+            {userChats?.length < 1 ? null : (
+                <div className="Menu">
+                    <div className="left_menu">
+                        <input type="text" name="" id="" className='search_input' placeholder='Search..' />
+                        <PotentialChats />
                         <div className='message_box'>
                             {isUserChatsLoading && <p>Loading Chats...</p>}
                             {
                                 userChats?.map((chat, index) => {
                                     return (
-                                        <div key={index} className='card'>
+                                        <div key={index} className='card' onClick={() => updateCurrentChat(chat)}>
                                             <UserChat chat={chat} user={user} />
                                             <div className="hr">
                                                 <hr />
@@ -33,30 +30,10 @@ const Menu = () => {
                                     )
                                 })}
                         </div>
-                    )}
-
-                    {/* <div className="users">
-                        <img src={user} alt="" height={"50px"} width={"50px"} className='img' />
-                        <h3>Vishala Gajera</h3>
-                    </div> */}
-                </div>
-                <div className="right_chat">
-                    <div className="main_content">
-                        <div className="incoming">
-                            <p>Hiii</p>
-                        </div>
-                        <div className="outgoing">
-                            <p>Hello</p>
-                        </div>
                     </div>
-                    <div className="message">
-                        <HiOutlineFaceSmile className='Icon' />
-                        <input type="text" name="" id="" className='message_input' placeholder='Search..' />
-                        <PiMicrophoneFill className='Icon' />
-                        <IoSendSharp className='Icon' />
-                    </div>
+                    <ChatBox />
                 </div>
-            </div>
+            )}
         </>
     )
 }

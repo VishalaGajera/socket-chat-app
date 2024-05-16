@@ -4,15 +4,16 @@
 }
 
 .header {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
+display: flex;
+justify-content: start;
+align-items: center;
     height: 70px;
     background-color: rgb(209, 209, 209);
 }
 
 .header .left_header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     font-size: 25px;
     gap: 10px;
@@ -41,13 +42,14 @@
     cursor: pointer;
 }
 
-.header .right_header {
+.chat_header {
     display: flex;
     position: relative;
     justify-content: start;
     align-items: center;
-    padding-left: 20px;
+    padding: 10px 0px 10px 20px;
     gap: 15px;
+    border-bottom: 2px solid rgb(172, 172, 172);
 }
 
 .right_header::after,

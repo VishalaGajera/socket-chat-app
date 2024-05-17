@@ -191,7 +191,9 @@ align-items: center;
 
 .right_chat .main_content {
     padding: 15px;
-    height: -webkit-fill-available;
+    overflow: scroll;
+    scrollbar-width: none;
+    /* height: -webkit-fill-available; */
 }
 
 .main_content .incoming {

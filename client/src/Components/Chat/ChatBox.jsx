@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import avtar from "../../Images/user.png";
 import { PiMicrophoneFill } from "react-icons/pi";
 import { IoSendSharp } from "react-icons/io5";
@@ -7,19 +7,23 @@ import { AuthContext } from '../../Context/AuthContext';
 import { ChatContext } from '../../Context/ChatContext';
 import UseFetchRecipientUser from '../../Hooks/UseFetchRecipient';
 import moment from "moment"
+import InputEmoji from "react-input-emoji"
 
 const ChatBox = () => {
 
     const { user } = useContext(AuthContext)
-    const { currentChat, messages, isMessagesLoading } = useContext(ChatContext)
+    const { currentChat, messages, isMessagesLoading, sendTextMessage } = useContext(ChatContext)
     const { recipientUser } = UseFetchRecipientUser(currentChat, user)
+    const [textMessage, setTextMessage] = useState("");
+    console.log("currentChat : ", currentChat);
+    console.log("text : ", textMessage);
     console.log(recipientUser);
     console.log("messages : ", messages);
-    // if (!recipientUser) {
-    //     return (
-    //         <p>No conversation selected yet...</p>
-    //     )
-    // }
+    if (!recipientUser) {
+        return (
+            <p>No conversation selected yet...</p>
+        )
+    }
     if (isMessagesLoading) {
         return (
             <p>Locading Chat ...</p>
@@ -38,12 +42,10 @@ const ChatBox = () => {
                     {
                         messages && messages.map((message, index) => {
                             return (
-                                <div key={index}>
-                                    <div className={`${message?.senderId ===user?._id ? "incoming" : "outgoing"}`}>
-                                        <p>{message.text}</p> 
+                                    <div className={`${message?.senderId === user?._id ? "incoming" : "outgoing"}`} key={index}>
+                                        <p>{message.text}</p>
                                         <span>{moment(message.createdAt).calendar()}</span>
                                     </div>
-                                </div>
                             )
                         })
                     }
@@ -52,10 +54,8 @@ const ChatBox = () => {
                     </div> */}
                 </div>
                 <div className="message">
-                    <HiOutlineFaceSmile className='Icon' />
-                    <input type="text" name="" id="" className='message_input' placeholder='Search..' />
-                    <PiMicrophoneFill className='Icon' />
-                    <IoSendSharp className='Icon' />
+                    <InputEmoji value={textMessage} onChange={setTextMessage} />
+                    <IoSendSharp className='Icon' onClick={() => sendTextMessage(textMessage, user, currentChat._id, setTextMessage)} />
                 </div>
             </div>
         </>

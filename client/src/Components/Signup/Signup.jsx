@@ -9,12 +9,14 @@ import { CiLock } from "react-icons/ci";
 import { FaUser } from "react-icons/fa";
 import animationData from "../../assets/Animation - 1715667767405.json"
 import { AuthContext } from '../../Context/AuthContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
     const { registerInfo, updateRegisterInfo, registerUser, registerError } = useContext(AuthContext)
     useEffect(() => {
         if (registerError) {
-            alert(registerError.message)
+            toast.error(registerError.message);
         }
     }, [registerError])
     return (
@@ -73,6 +75,7 @@ const Signup = () => {
                         </div>
                     </div>
                 </div>
+                <ToastContainer/>
             </div>
         </>
     )

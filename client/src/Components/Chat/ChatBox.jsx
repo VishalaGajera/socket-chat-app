@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import avtar from "../../Images/user.png";
 import { PiMicrophoneFill } from "react-icons/pi";
 import { IoSendSharp } from "react-icons/io5";
@@ -15,13 +15,20 @@ const ChatBox = () => {
     const { currentChat, messages, isMessagesLoading, sendTextMessage } = useContext(ChatContext)
     const { recipientUser } = UseFetchRecipientUser(currentChat, user)
     const [textMessage, setTextMessage] = useState("");
-    console.log("currentChat : ", currentChat);
-    console.log("text : ", textMessage);
-    console.log(recipientUser);
-    console.log("messages : ", messages);
+    const scroll=useRef();
+    
+    useEffect(()=>{
+        scroll.current?.scrollIntoView({behavior:"smooth"})
+    },[messages])
+    if (!user) {
+        return (
+            <p className='p'>Loading user...</p>
+        )
+    }
+    
     if (!recipientUser) {
         return (
-            <p>No conversation selected yet...</p>
+            <p className='p'>No conversation selected yet...</p>
         )
     }
     if (isMessagesLoading) {
@@ -35,16 +42,16 @@ const ChatBox = () => {
             <div className="right_chat">
                 <div className="chat_header">
                     <img src={avtar} alt="" height={"50px"} width={"50px"} className='img' />
-                    {/* <h3>{recipientUser?.name}</h3> */}
-                    <h3>vishala gajera</h3>
+                    <h3>{recipientUser?.name}</h3>
+                    {/* <h3>vishala gajera</h3> */}
                 </div>
                 <div className="main_content">
                     {
                         messages && messages.map((message, index) => {
                             return (
-                                    <div className={`${message?.senderId === user?._id ? "incoming" : "outgoing"}`} key={index}>
+                                    <div className={`${message?.senderId === user?._id ? "incoming" : "outgoing"}`} ref={scroll} key={index}>
                                         <p>{message.text}</p>
-                                        <span>{moment(message.createdAt).calendar()}</span>
+                                        {/* <span>{moment(message.createdAt).format('h:mm A')}</span> */}
                                     </div>
                             )
                         })

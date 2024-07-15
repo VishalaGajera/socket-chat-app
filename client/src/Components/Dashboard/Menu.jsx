@@ -7,8 +7,7 @@ import ChatBox from '../Chat/ChatBox';
 
 const Menu = () => {
     const { user } = useContext(AuthContext)
-    const { userChats, isUserChatsLoading, updateCurrentChat } = useContext(ChatContext)
-    console.log("userChats : ", userChats);
+    const { userChats, isUserChatsLoading, updateCurrentChat } = useContext(ChatContext);
     return (
         <>
             {userChats?.length < 1 ? null : (

@@ -3,6 +3,7 @@ import { LuRefreshCcw } from "react-icons/lu";
 import { RiMessage2Line } from "react-icons/ri";
 import { IoMdMenu } from "react-icons/io";
 import user from "../../Images/user.png"
+import Notification from '../Chat/Notification';
 
 const Header = () => {
     return (
@@ -14,7 +15,8 @@ const Header = () => {
                     </div>
                     <div className="icon">
                         <LuRefreshCcw />
-                        <RiMessage2Line />
+                        {/* <RiMessage2Line /> */}
+                        <Notification/>
                         <IoMdMenu />
                     </div>
                 </div>

@@ -19,7 +19,6 @@ export const AuthContextProvider = ({ children }) => {
         password: ""
     })
 
-    console.log("loginInfo :", loginInfo);
     useEffect(() => {
         const user = localStorage.getItem("User");
         setUser(JSON.parse(user))
@@ -44,8 +43,7 @@ export const AuthContextProvider = ({ children }) => {
     }, [registerInfo])
 
     const loginUser = useCallback(async () => {
-        setLoginError(null)
-        console.log(loginInfo);
+        setLoginError(null);
         const response = await postRequest(`${baseUrl}/user/login-user`, JSON.stringify(loginInfo))
         if (response.error) {
             return setLoginError(response)

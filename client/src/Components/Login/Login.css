@@ -10,7 +10,7 @@
   color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   width: 60%;
-  height: 70%;
+  height: 75%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -76,7 +76,7 @@
   cursor: pointer;
 }
 
-.right_side {
+.main_content .right_side {
   display: flex;
   justify-content: center;
   align-items: center;

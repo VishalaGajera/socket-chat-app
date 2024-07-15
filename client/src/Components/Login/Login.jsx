@@ -8,13 +8,16 @@ import { CiLock } from "react-icons/ci";
 import animationData from "../../assets/Animation - 1715662448996.json"
 import Lottie from "lottie-react"
 import { AuthContext } from '../../Context/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
 
     const { loginUser, loginError, loginInfo, updateLoginInfo } = useContext(AuthContext)
     useEffect(() => {
         if (loginError) {
-            alert(loginError.error)
+            toast.error(loginError.message);
         }
     }, [loginError])
     
@@ -63,6 +66,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
+                <ToastContainer/>
             </div>
         </>
     )

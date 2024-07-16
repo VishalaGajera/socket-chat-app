@@ -2,12 +2,17 @@ import React, { useContext } from 'react'
 import UseFetchRecipientUser from '../../Hooks/UseFetchRecipient'
 import avtar from "../../Images/user.png";
 import { ChatContext } from '../../Context/ChatContext';
+import { unreadNotificationsFunc } from '../../utils/unreadNotifications';
 
 const UserChat = ({ chat, user }) => {
     const { recipientUser } = UseFetchRecipientUser(chat, user);
-    const {onlineUsers}=useContext(ChatContext);
-    
-    const isOnline=onlineUsers?.some((user) => user?.userId === recipientUser?._id)
+    const { onlineUsers } = useContext(ChatContext);
+
+    const unreadNotifications = unreadNotificationsFunc(notifications);
+    const thisUserNotifications = unreadNotifications?.filter(
+        n => n.senderId === recipientUser?._id
+    )
+    const isOnline = onlineUsers?.some((user) => user?.userId === recipientUser?._id)
 
     return (
         <div className="users_card">
@@ -25,8 +30,9 @@ const UserChat = ({ chat, user }) => {
                 <div className="date">
                     5/16/2024
                 </div>
-                <div className="message_notification">
-                    2
+                <div className={thisUserNotifications.length > 0 ? "message_notification" : ""}>
+                    {thisUserNotifications?.length > 0 ? thisUserNotifications?.length : ""}
+
                 </div>
                 <span className={isOnline ? "online_dot" : ""}></span>
             </div>

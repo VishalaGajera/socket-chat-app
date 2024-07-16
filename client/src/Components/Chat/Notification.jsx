@@ -10,7 +10,7 @@ const Notification = () => {
     const { user } = useContext(AuthContext);
     const { notifications, userChats, allUsers, markAllNotificationsAsRead, markNotificationAsRead } = useContext(ChatContext);
     const unreadNotifications = unreadNotificationsFunc(notifications);
-    const modifiedNotifications = notifications.map((n) => {
+    const modifiedNotifications = notifications && notifications?.map((n) => {
         const sender = allUsers.find(user => user._id === n.senderId);
         return {
             ...n,
